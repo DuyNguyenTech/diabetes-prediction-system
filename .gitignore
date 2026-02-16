@@ -1,0 +1,9 @@
+#loai bo thu muc ao
+venv/
+.venv/
+__pycache__/
+
+#cac file he thong
+.vscode/
+.idea/
+*.pyc

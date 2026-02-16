@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HỆ THỐNG HỖ TRỢ CHẨN ĐOÁN Y KHOA</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        :root {
+            --primary-color: #009688;
+            --primary-dark: #00796b;
+            --bg-light: #f4f7f6;
+            --text-main: #2c3e50;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            color: var(--text-main);
+            height: 100vh;
+            overflow: hidden; 
+        }
+
+        .navbar-custom {
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            height: 70px;
+            padding: 0 2rem;
+            z-index: 1000;
+        }
+        .navbar-brand { font-size: 1.1rem; text-transform: uppercase; }
+        .nav-link { font-weight: 600; color: #2c3e50 !important; margin: 0 10px; transition: 0.3s; font-size: 0.95rem; }
+        .nav-link:hover, .nav-link.active { color: var(--primary-color) !important; }
+        
+        .btn-cta { 
+            background: var(--primary-color); color: white !important; 
+            border-radius: 20px; padding: 8px 20px; 
+            box-shadow: 0 4px 6px rgba(0,150,136,0.2);
+        }
+        .btn-cta:hover { background: var(--primary-dark); transform: translateY(-1px); }
+
+        .wrapper {
+            display: flex;
+            height: calc(100vh - 70px); 
+            width: 100vw;
+        }
+
+        .sidebar {
+            width: 420px;
+            background: #ffffff;
+            border-right: 1px solid #eef2f3;
+            padding: 1.5rem 2rem;
+            overflow-y: auto;
+            z-index: 10;
+            display: flex; flex-direction: column;
+        }
+
+        .brand-logo {
+            display: flex; align-items: center; gap: 10px;
+            margin-bottom: 1.5rem; color: var(--primary-color);
+            font-weight: 700; font-size: 1.2rem;
+            border-bottom: 2px solid #f0f0f0; padding-bottom: 15px;
+        }
+
+        .form-floating > label { font-size: 0.85rem; color: #95a5a6; }
+        .form-control, .form-select { border-radius: 10px; border: 1px solid #e0e0e0; }
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(0, 150, 136, 0.15);
+        }
+
+        .btn-medical {
+            background: var(--primary-color); color: white;
+            padding: 12px; border-radius: 10px; border: none;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+            transition: all 0.3s; margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 150, 136, 0.3);
+        }
+        .btn-medical:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+        .main-content {
+            flex: 1; padding: 2rem;
+            display: flex; justify-content: center; align-items: center;
+            background-color: #f8fbfb;
+            background-image: radial-gradient(#dbebe9 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+        }
+
+        .result-card {
+            background: white; border-radius: 24px; padding: 3rem;
+            width: 100%; max-width: 550px;
+            box-shadow: 0 20px 50px rgba(0,150,136,0.1);
+            text-align: center; display: none;
+            animation: slideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .placeholder-content { text-align: center; color: #b0bec5; }
+        .placeholder-content i { font-size: 6rem; margin-bottom: 1.5rem; color: #cfd8dc; }
+        
+        .risk-badge { font-size: 3.5rem; font-weight: 800; margin: 0.5rem 0; display: block; line-height: 1; }
+        .risk-high { color: #e74c3c; }
+        .risk-low { color: #00b894; }
+
+        @keyframes slideIn { from { opacity: 0; transform: translateY(30px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        #loadingOverlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.95); z-index: 9999; display: none; justify-content: center; align-items: center; flex-direction: column; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold text-primary" href="index.html">
+                <i class="fa-solid fa-staff-snake"></i> HỆ THỐNG HỖ TRỢ CHẨN ĐOÁN Y KHOA
+            </a>
+            <div class="collapse navbar-collapse justify-content-end">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="models.html">Kho Mô Hình</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.html">Tin Tức</a></li>
+                    <li class="nav-item"><a class="nav-link btn-cta" href="diagnosis.html">Chẩn Đoán</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="loadingOverlay">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status"></div>
+        <h5 class="mt-3 text-primary fw-bold">AI đang tính toán...</h5>
+        <p class="text-muted small">Đang đối chiếu dữ liệu với 100.000 bản ghi</p>
+    </div>
+
+    <div class="wrapper">
+        <div class="sidebar">
+            <div class="brand-logo">
+                <i class="fa-solid fa-file-medical"></i> THÔNG SỐ BỆNH NHÂN
+            </div>
+            
+            <form id="healthForm">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <select class="form-select" id="gender">
+                                <option value="Male">Nam</option>
+                                <option value="Female">Nữ</option>
+                            </select>
+                            <label>Giới tính</label>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="age" placeholder="Tuổi" required min="1" max="120">
+                            <label>Tuổi</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <select class="form-select" id="hypertension">
+                                <option value="0">Không</option>
+                                <option value="1">Có</option>
+                            </select>
+                            <label>Cao huyết áp</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <select class="form-select" id="heart_disease">
+                                <option value="0">Không</option>
+                                <option value="1">Có</option>
+                            </select>
+                            <label>Bệnh tim mạch</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-floating">
+                            <select class="form-select" id="smoking_history">
+                                <option value="never">Chưa bao giờ</option>
+                                <option value="current">Đang hút thuốc</option>
+                                <option value="former">Đã cai thuốc</option>
+                                <option value="No Info">Không rõ thông tin</option>
+                            </select>
+                            <label>Lịch sử hút thuốc</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="number" step="0.1" class="form-control" id="bmi" placeholder="BMI" required>
+                            <label>BMI (VD: 22.5)</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="number" step="0.1" class="form-control" id="hba1c" placeholder="HbA1c" required>
+                            <label>HbA1c (%)</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="blood_glucose" placeholder="Blood Glucose" required>
+                            <label>Đường huyết lúc đói (mg/dL)</label>
+                            <div class="form-text text-muted small ms-1">
+                                * Đo vào buổi sáng, trước khi ăn.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-4">
+                        <button type="submit" class="btn btn-medical w-100">
+                            <i class="fa-solid fa-bolt"></i> PHÂN TÍCH NGAY
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="main-content">
+            <div id="placeholder" class="placeholder-content">
+                <i class="fa-solid fa-user-doctor-message"></i>
+                <h2>Sẵn Sàng Chẩn Đoán</h2>
+                <p>Nhập thông tin bệnh nhân theo thứ tự dataset.<br>Hệ thống sử dụng Random Forest Model v1.0</p>
+            </div>
+
+            <div id="resultCard" class="result-card">
+                <h6 class="text-uppercase text-muted mb-4" style="letter-spacing: 2px;">KẾT QUẢ PHÂN TÍCH</h6>
+                
+                <div style="width: 200px; height: 200px; margin: 0 auto;">
+                    <canvas id="riskChart"></canvas>
+                </div>
+
+                <div id="riskValue" class="risk-badge mt-3">0%</div>
+                <h3 id="riskLabel" class="fw-bold mb-3">---</h3>
+                
+                <div class="alert alert-light border" role="alert" id="medicalAdvice" style="text-align: left; font-size: 0.9rem;">
+                    <i class="fa-solid fa-spinner fa-spin"></i> Đang tải lời khuyên...
+                </div>
+
+                <div class="d-flex justify-content-center gap-2 mt-4">
+                    <button class="btn btn-outline-secondary px-4" onclick="window.print()">
+                        <i class="fa-solid fa-print"></i> In Hồ Sơ
+                    </button>
+                    <button class="btn btn-primary px-4" onclick="location.reload()">
+                        <i class="fa-solid fa-rotate"></i> Phân Tích Mới
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let myChart = null;
+
+        document.getElementById('healthForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            document.getElementById('loadingOverlay').style.display = 'flex';
+
+            const data = {
+                gender: document.getElementById('gender').value,
+                age: parseInt(document.getElementById('age').value),
+                hypertension: parseInt(document.getElementById('hypertension').value),
+                heart_disease: parseInt(document.getElementById('heart_disease').value),
+                smoking_history: document.getElementById('smoking_history').value,
+                bmi: parseFloat(document.getElementById('bmi').value),
+                HbA1c_level: parseFloat(document.getElementById('hba1c').value),
+                blood_glucose_level: parseInt(document.getElementById('blood_glucose').value)
+            };
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) throw new Error('Mất kết nối tới Server AI');
+
+                const result = await response.json();
+
+                setTimeout(() => {
+                    showResult(result);
+                    document.getElementById('loadingOverlay').style.display = 'none';
+                }, 600); 
+
+            } catch (error) {
+                document.getElementById('loadingOverlay').style.display = 'none';
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi Kết Nối',
+                    text: 'Không thể gọi API từ Docker. Hãy kiểm tra Backend!',
+                    confirmButtonColor: '#009688'
+                });
+            }
+        });
+
+        function showResult(result) {
+            document.getElementById('placeholder').style.display = 'none';
+            document.getElementById('resultCard').style.display = 'block';
+
+            const probability = (result.probability * 100).toFixed(1);
+            const isHighRisk = result.prediction === 1;
+            const riskValue = document.getElementById('riskValue');
+            const riskLabel = document.getElementById('riskLabel');
+            const advice = document.getElementById('medicalAdvice');
+
+            riskValue.innerText = probability + "%";
+            
+            if (isHighRisk) {
+                riskValue.className = "risk-badge risk-high";
+                riskLabel.innerText = "NGUY CƠ CAO";
+                riskLabel.style.color = "#e74c3c";
+                advice.className = "alert alert-danger border-danger-subtle";
+                advice.innerHTML = `<h6 class="alert-heading fw-bold"><i class="fa-solid fa-triangle-exclamation"></i> Cảnh báo Y khoa</h6><p class="mb-0">Chỉ số vượt ngưỡng an toàn (0.37). Đề nghị thực hiện xét nghiệm chuyên sâu.</p>`;
+            } else {
+                riskValue.className = "risk-badge risk-low";
+                riskLabel.innerText = "NGUY CƠ THẤP";
+                riskLabel.style.color = "#00b894";
+                advice.className = "alert alert-success border-success-subtle";
+                advice.innerHTML = `<h6 class="alert-heading fw-bold"><i class="fa-solid fa-shield-check"></i> Sức khỏe tốt</h6><p class="mb-0">Các chỉ số nằm trong vùng an toàn. Tiếp tục duy trì lối sống lành mạnh.</p>`;
+            }
+
+            const ctx = document.getElementById('riskChart').getContext('2d');
+            if (myChart) myChart.destroy();
+
+            myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Nguy cơ', 'An toàn'],
+                    datasets: [{
+                        data: [probability, 100 - probability],
+                        backgroundColor: [isHighRisk ? '#e74c3c' : '#00b894', '#f1f2f6'],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    cutout: '85%',
+                    responsive: true,
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

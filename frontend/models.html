@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kho Mô Hình AI | MED-AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', sans-serif;
+            display: block !important; 
+            height: auto !important;
+            overflow-y: auto !important;
+        }
+
+        .navbar-custom { background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 15px 0; }
+        .nav-link { font-weight: 600; color: #2c3e50 !important; margin: 0 10px; transition: 0.3s; }
+        .nav-link:hover, .nav-link.active { color: #009688 !important; }
+        .btn-nav-cta {
+            background: #009688; color: white !important; border-radius: 20px; padding: 8px 25px;
+            box-shadow: 0 4px 6px rgba(0,150,136,0.2);
+        }
+        .btn-nav-cta:hover { background: #00796b; transform: translateY(-2px); }
+
+        .model-card {
+            background: white;
+            border-radius: 15px;
+            border: none;
+            transition: all 0.3s;
+            height: 100%;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .model-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .card-header-custom {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        .icon-lg { font-size: 3rem; margin-bottom: 10px; }
+        .status-badge { position: absolute; top: 15px; right: 15px; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-4 text-primary" href="index.html">
+                <i class="fa-solid fa-staff-snake"></i> HỆ THỐNG HỖ TRỢ CHẨN ĐOÁN Y KHOA
+            </a>
+            <div class="collapse navbar-collapse justify-content-end">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="models.html">Kho Mô Hình</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.html">Tin Tức</a></li>
+                    <li class="nav-item ms-2"><a class="btn-nav-cta nav-link" href="diagnosis.html">Chẩn Đoán Ngay</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold text-dark">Danh Mục Mô Hình AI</h2>
+            <p class="text-muted">Các thuật toán đang được triển khai và phát triển</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="model-card position-relative border border-2 border-primary">
+                    <span class="badge bg-success status-badge">Đang hoạt động</span>
+                    <div class="card-header-custom bg-light text-primary">
+                        <i class="fa-solid fa-droplet icon-lg"></i>
+                        <h4 class="fw-bold mb-0">Tiểu Đường</h4>
+                    </div>
+                    <div class="p-4">
+                        <ul class="list-unstyled text-secondary small mb-4">
+                            <li class="mb-2"><i class="fa-solid fa-code me-2"></i>Thuật toán: <strong>Random Forest</strong></li>
+                            <li class="mb-2"><i class="fa-solid fa-bullseye me-2"></i>Độ chính xác: <strong>96.5%</strong></li>
+                            <li><i class="fa-solid fa-database me-2"></i>Dữ liệu: <strong>100k mẫu</strong></li>
+                        </ul>
+                        <p class="card-text text-muted small">Phân tích 8 chỉ số sinh tồn (HbA1c, Glucose, BMI...) để dự báo sớm nguy cơ.</p>
+                        <a href="diagnosis.html" class="btn btn-outline-primary w-100 fw-bold mt-2">Sử Dụng Ngay</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="model-card position-relative" style="opacity: 0.8">
+                    <span class="badge bg-warning text-dark status-badge">Sắp ra mắt</span>
+                    <div class="card-header-custom bg-light text-danger">
+                        <i class="fa-solid fa-heart-pulse icon-lg"></i>
+                        <h4 class="fw-bold mb-0">Tim Mạch</h4>
+                    </div>
+                    <div class="p-4">
+                        <ul class="list-unstyled text-secondary small mb-4">
+                            <li class="mb-2"><i class="fa-solid fa-code me-2"></i>Thuật toán: <strong>Neural Network</strong></li>
+                            <li class="mb-2"><i class="fa-solid fa-spinner fa-spin me-2"></i>Trạng thái: <strong>Đang train</strong></li>
+                        </ul>
+                        <p class="card-text text-muted small">Phân tích điện tâm đồ (ECG) để cảnh báo sớm nguy cơ đột quỵ và nhồi máu.</p>
+                        <button class="btn btn-secondary w-100 mt-2" disabled>Đang Huấn Luyện</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="model-card position-relative" style="opacity: 0.8">
+                    <span class="badge bg-info text-dark status-badge">Q3/2026</span>
+                    <div class="card-header-custom bg-light text-info">
+                        <i class="fa-solid fa-lungs icon-lg"></i>
+                        <h4 class="fw-bold mb-0">Ung Thư Phổi</h4>
+                    </div>
+                    <div class="p-4">
+                        <ul class="list-unstyled text-secondary small mb-4">
+                            <li class="mb-2"><i class="fa-solid fa-code me-2"></i>Thuật toán: <strong>CNN (Image)</strong></li>
+                            <li class="mb-2"><i class="fa-solid fa-database me-2"></i>Dữ liệu: <strong>X-Quang</strong></li>
+                        </ul>
+                        <p class="card-text text-muted small">Chẩn đoán dựa trên hình ảnh X-Quang lồng ngực với độ nhạy cao.</p>
+                        <button class="btn btn-secondary w-100 mt-2" disabled>Chờ Dữ Liệu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

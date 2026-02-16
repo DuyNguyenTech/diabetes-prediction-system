@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HỆ THỐNG HỖ TRỢ CHẨN ĐOÁN Y KHOA | DuyNguyenTech</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #009688;
+            --primary-dark: #00796b;
+            --text-dark: #2c3e50;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f9fa;
+            display: block !important; 
+            height: auto !important;
+            overflow-y: auto !important;
+        }
+
+        .navbar-custom {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            padding: 15px 0;
+        }
+        .navbar-brand {
+            font-size: 1.1rem; 
+            text-transform: uppercase;
+        }
+        
+        .nav-link { font-weight: 600; color: var(--text-dark) !important; margin: 0 10px; transition: 0.3s; }
+        .nav-link:hover, .nav-link.active { color: var(--primary-color) !important; }
+        .btn-nav-cta {
+            background: var(--primary-color);
+            color: white !important;
+            border-radius: 20px;
+            padding: 8px 25px;
+            box-shadow: 0 4px 10px rgba(0,150,136,0.2);
+        }
+        .btn-nav-cta:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+        .hero-section {
+            background: linear-gradient(135deg, #e0f2f1 0%, #ffffff 100%);
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .hero-desc {
+            font-size: 1.25rem;
+            color: #7f8c8d;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        .btn-main-cta {
+            background: var(--primary-color);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 15px 40px;
+            border-radius: 50px;
+            border: none;
+            box-shadow: 0 10px 25px rgba(0,150,136,0.3);
+            transition: all 0.3s;
+        }
+        .btn-main-cta:hover {
+            background: var(--primary-dark);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,150,136,0.4);
+        }
+
+        .feature-box {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid #eee;
+            height: 100%;
+        }
+        .feature-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border-color: transparent;
+        }
+        .icon-wrapper {
+            width: 80px; height: 80px;
+            background: #e0f2f1;
+            color: var(--primary-color);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 25px;
+        }
+        .feature-title { font-weight: 700; margin-bottom: 15px; font-size: 1.3rem; }
+        .feature-text { color: #95a5a6; line-height: 1.6; }
+
+        footer { background: #2c3e50; color: white; padding: 40px 0; margin-top: 80px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-primary" href="index.html">
+                <i class="fa-solid fa-staff-snake"></i> HỆ THỐNG HỖ TRỢ CHẨN ĐOÁN Y KHOA
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="models.html">Kho Mô Hình</a></li>
+                    <li class="nav-item"><a class="nav-link" href="news.html">Tin Tức</a></li>
+                    <li class="nav-item ms-2"><a class="btn-nav-cta text-decoration-none" href="diagnosis.html">Chẩn Đoán Ngay</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Trí Tuệ Nhân Tạo<br><span style="color: var(--primary-color)">Vì Sức Khỏe Cộng Đồng</span></h1>
+            <p class="hero-desc">
+                Hệ thống hỗ trợ bác sĩ chẩn đoán sớm bệnh lý Tiểu đường với độ chính xác trên 90% nhờ thuật toán Random Forest.
+            </p>
+            <a href="diagnosis.html" class="btn btn-main-cta text-decoration-none">
+                <i class="fa-solid fa-stethoscope me-2"></i> BẮT ĐẦU CHẨN ĐOÁN
+            </a>
+            
+            <div class="mt-5 text-muted small">
+                <i class="fa-solid fa-shield-halved me-2"></i> An toàn dữ liệu tuyệt đối
+                <span class="mx-3">|</span>
+                <i class="fa-solid fa-bolt me-2"></i> Kết quả tức thì
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-box">
+                        <div class="icon-wrapper"><i class="fa-solid fa-microchip"></i></div>
+                        <h3 class="feature-title">Công Nghệ AI Tiên Tiến</h3>
+                        <p class="feature-text">Sử dụng thuật toán Random Forest đã được huấn luyện trên 100.000 mẫu dữ liệu bệnh án thực tế.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-box">
+                        <div class="icon-wrapper"><i class="fa-solid fa-user-doctor"></i></div>
+                        <h3 class="feature-title">Trợ Lý Ảo Đắc Lực</h3>
+                        <p class="feature-text">Giúp giảm tải áp lực cho đội ngũ y tế, đưa ra cảnh báo sớm với độ chính xác cao.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-box">
+                        <div class="icon-wrapper"><i class="fa-solid fa-lock"></i></div>
+                        <h3 class="feature-title">Bảo Mật Cục Bộ</h3>
+                        <p class="feature-text">Triển khai trên Docker Container, dữ liệu được xử lý tại chỗ, không gửi lên Cloud công cộng.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <h3>HỆ THỐNG HỖ TRỢ CHẨN ĐOÁN Y KHOA</h3>
+            <div class="mt-3">
+                <small>© Bản quyền thuộc DuyNguyenTech.</small>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
