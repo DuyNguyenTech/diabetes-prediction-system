@@ -65,7 +65,7 @@ Hệ thống sử dụng thuật toán học máy **Random Forest Classifier**, 
 ### Bước 1: Clone dự án
 Tải mã nguồn về máy tính của bạn:
 ```bash
-git clone [https://github.com/username/diabetes-prediction-system.git](https://github.com/username/diabetes-prediction-system.git)
+git clone [https://github.com/DuyNguyenTech/diabetes-prediction-system.git](https://github.com/DuyNguyenTech/diabetes-prediction-system.git)
 cd diabetes-prediction-system
 
 ```
@@ -133,12 +133,6 @@ Hệ thống yêu cầu 8 chỉ số sinh tồn quan trọng để thực hiện
 
 ## 👨‍💻 Tác giả
 
-**DuyNguyenTech**
-
-* **Vai trò:** Fullstack Developer & AI Engineer.
-* **Liên hệ:** [Email của bạn]
-* **Đồ án:** Kỹ thuật Phần mềm 2026.
+**NguyenThanhDuy**
 
 ---
-
-*© 2026 MED-AI System. All rights reserved.*
