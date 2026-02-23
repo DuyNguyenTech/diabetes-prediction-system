@@ -84,7 +84,7 @@ pipeline = ImbPipeline([
 ])
 
 #5 TRAIN
-print("BUOC 3: Dang huan luyen mo hinh (Co the mat vai giay)...")
+print("BUOC 3: Dang huan luyen mo hinh...")
 pipeline.fit(X_train, y_train)
 
 #6 TOI UU HOA NGUONG

@@ -3,188 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HỆ THỐNG HỖ TRỢ CHẨN ĐOÁN Y KHOA | DuyNguyenTech</title>
+    <title>Chẩn Đoán Tiểu Đường</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary-color: #009688;
-            --primary-dark: #00796b;
-            --text-dark: #2c3e50;
-        }
-
-        body {
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            background-color: #f8f9fa;
-            display: block !important; 
-            height: auto !important;
-            overflow-y: auto !important;
-        }
-
-        .navbar-custom {
-            background: white;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-            padding: 15px 0;
-        }
-        .navbar-brand {
-            font-size: 1.1rem; 
-            text-transform: uppercase;
-        }
-        
-        .nav-link { font-weight: 600; color: var(--text-dark) !important; margin: 0 10px; transition: 0.3s; }
-        .nav-link:hover, .nav-link.active { color: var(--primary-color) !important; }
-        .btn-nav-cta {
-            background: var(--primary-color);
-            color: white !important;
-            border-radius: 20px;
-            padding: 8px 25px;
-            box-shadow: 0 4px 10px rgba(0,150,136,0.2);
-        }
-        .btn-nav-cta:hover { background: var(--primary-dark); transform: translateY(-2px); }
-
-        .hero-section {
-            background: linear-gradient(135deg, #e0f2f1 0%, #ffffff 100%);
-            padding: 100px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--text-dark);
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-        .hero-desc {
-            font-size: 1.25rem;
-            color: #7f8c8d;
-            max-width: 700px;
-            margin: 0 auto 40px;
-        }
-        .btn-main-cta {
-            background: var(--primary-color);
-            color: white;
-            font-size: 1.2rem;
-            font-weight: 700;
-            padding: 15px 40px;
-            border-radius: 50px;
-            border: none;
-            box-shadow: 0 10px 25px rgba(0,150,136,0.3);
-            transition: all 0.3s;
-        }
-        .btn-main-cta:hover {
-            background: var(--primary-dark);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,150,136,0.4);
-        }
-
-        .feature-box {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 20px;
-            text-align: center;
-            transition: all 0.3s;
-            border: 1px solid #eee;
-            height: 100%;
-        }
-        .feature-box:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-            border-color: transparent;
-        }
-        .icon-wrapper {
-            width: 80px; height: 80px;
-            background: #e0f2f1;
-            color: var(--primary-color);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 2rem;
-            margin: 0 auto 25px;
-        }
-        .feature-title { font-weight: 700; margin-bottom: 15px; font-size: 1.3rem; }
-        .feature-text { color: #95a5a6; line-height: 1.6; }
-
-        footer { background: #2c3e50; color: white; padding: 40px 0; margin-top: 80px; text-align: center; }
-    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="bg-light d-flex align-items-center min-vh-100 py-3">
 
-    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold text-primary" href="index.html">
-                <i class="fa-solid fa-staff-snake"></i> HỆ THỐNG HỖ TRỢ CHẨN ĐOÁN Y KHOA
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-center">
-                    <li class="nav-item"><a class="nav-link active" href="index.html">Trang chủ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="models.html">Kho Mô Hình</a></li>
-                    <li class="nav-item"><a class="nav-link" href="news.html">Tin Tức</a></li>
-                    <li class="nav-item ms-2"><a class="btn-nav-cta text-decoration-none" href="diagnosis.html">Chẩn Đoán Ngay</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<div class="container-lg">
+    
+    <div class="text-center mb-4 fade-in">
+        <h2 id="mainTitle" class="text-teal fw-bolder text-uppercase mb-2" style="letter-spacing: 1px; cursor: pointer; transition: opacity 0.2s;" title="Nhấn để làm mới trang">
+            <i class="fas fa-robot me-2"></i>AI Hỗ Trợ Chẩn Đoán Bệnh Tiểu Đường
+        </h2>
+    </div>
 
-    <section class="hero-section">
-        <div class="container">
-            <h1 class="hero-title">Trí Tuệ Nhân Tạo<br><span style="color: var(--primary-color)">Vì Sức Khỏe Cộng Đồng</span></h1>
-            <p class="hero-desc">
-                Hệ thống hỗ trợ bác sĩ chẩn đoán sớm bệnh lý Tiểu đường với độ chính xác trên 90% nhờ thuật toán Random Forest.
-            </p>
-            <a href="diagnosis.html" class="btn btn-main-cta text-decoration-none">
-                <i class="fa-solid fa-stethoscope me-2"></i> BẮT ĐẦU CHẨN ĐOÁN
-            </a>
+    <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+        <div class="row g-0">
             
-            <div class="mt-5 text-muted small">
-                <i class="fa-solid fa-shield-halved me-2"></i> An toàn dữ liệu tuyệt đối
-                <span class="mx-3">|</span>
-                <i class="fa-solid fa-bolt me-2"></i> Kết quả tức thì
-            </div>
-        </div>
-    </section>
+            <div class="col-12 col-lg-5 bg-white p-3 p-md-4 border-end">
+                <h6 class="text-teal fw-bold mb-3 text-uppercase text-center text-lg-start">
+                    <i class="fas fa-notes-medical me-2"></i>Thông tin bệnh nhân
+                </h6>
+                
+                <form id="diagnosisForm">
+                    <div class="row g-2">
+                        <div class="col-sm-6">
+                            <label class="form-label fw-bold text-dark small mb-1">Giới tính</label>
+                            <select class="form-select form-select-sm text-dark" id="gender" required>
+                                <option value="Male">Nam</option>
+                                <option value="Female">Nữ</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label fw-bold text-dark small mb-1">Tuổi</label>
+                            <input type="number" class="form-control form-control-sm text-dark" id="age" placeholder="Ví dụ: 29" min="1" max="120" required>
+                        </div>
 
-    <section class="py-5">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="feature-box">
-                        <div class="icon-wrapper"><i class="fa-solid fa-microchip"></i></div>
-                        <h3 class="feature-title">Công Nghệ AI Tiên Tiến</h3>
-                        <p class="feature-text">Sử dụng thuật toán Random Forest đã được huấn luyện trên 100.000 mẫu dữ liệu bệnh án thực tế.</p>
+                        <div class="col-sm-6">
+                            <label class="form-label fw-bold text-dark small mb-1">Cao huyết áp</label>
+                            <select class="form-select form-select-sm text-dark" id="hypertension" required>
+                                <option value="0">Không</option>
+                                <option value="1">Có</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label fw-bold text-dark small mb-1">Bệnh tim mạch</label>
+                            <select class="form-select form-select-sm text-dark" id="heart_disease" required>
+                                <option value="0">Không</option>
+                                <option value="1">Có</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label fw-bold text-dark small mb-1">Lịch sử hút thuốc</label>
+                            <select class="form-select form-select-sm text-dark" id="smoking_history" required>
+                                <option value="never">Chưa bao giờ</option>
+                                <option value="former">Đã cai</option>
+                                <option value="current">Đang hút</option>
+                                <option value="No Info">Không có thông tin</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label class="form-label fw-bold text-dark small mb-1">BMI</label>
+                            <input type="number" step="0.1" class="form-control form-control-sm text-dark" id="bmi" placeholder="Ví dụ: 22.5" required>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label fw-bold text-dark small mb-1">HbA1c (%)</label>
+                            <input type="number" step="0.1" class="form-control form-control-sm text-dark" id="HbA1c_level" placeholder="Ví dụ: 5.5" required>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label fw-bold text-dark small mb-1">Đường huyết lúc đói (mg/dL)</label>
+                            <input type="number" class="form-control form-control-sm text-dark" id="blood_glucose_level" placeholder="Ví dụ: 120" required>
+                            <small class="text-muted fst-italic mt-1 d-block" style="font-size: 0.75rem;"><i class="fas fa-info-circle me-1"></i>* Đo vào buổi sáng, trước khi ăn.</small>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-teal w-100 mt-3 py-2 fw-bold rounded-3 shadow-sm text-uppercase" id="submitBtn">
+                        <i class="fas fa-bolt me-2"></i>Phân Tích Ngay
+                    </button>
+                </form>
+            </div>
+
+            <div class="col-12 col-lg-7 p-3 p-md-4 bg-light d-flex flex-column align-items-center justify-content-center text-center">
+                
+                <div id="initialState" class="fade-in w-100">
+                    <i class="fas fa-user-md fa-3x text-muted opacity-25 mb-3"></i>
+                    <h5 class="text-muted fw-bold opacity-50 mb-3">Sẵn Sàng Chẩn Đoán</h5>
+                    
+                    <div class="alert alert-warning bg-warning bg-opacity-10 border-warning border-opacity-25 mx-auto text-start p-2" style="max-width: 450px;">
+                        <p class="mb-0 small text-warning-emphasis" style="font-size: 0.8rem;">
+                            <i class="fas fa-exclamation-triangle me-1"></i><strong>Khuyến cáo:</strong> Mô hình AI chỉ mang tính chất tham khảo sàng lọc, <strong>hoàn toàn không thay thế</strong> chỉ định của bác sĩ.
+                        </p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="feature-box">
-                        <div class="icon-wrapper"><i class="fa-solid fa-user-doctor"></i></div>
-                        <h3 class="feature-title">Trợ Lý Ảo Đắc Lực</h3>
-                        <p class="feature-text">Giúp giảm tải áp lực cho đội ngũ y tế, đưa ra cảnh báo sớm với độ chính xác cao.</p>
+
+                <div id="resultState" class="d-none w-100 fade-in">
+                    <div class="bg-white p-2 rounded-4 shadow-sm border mx-auto mb-3" style="max-width: 450px;">
+                        <h5 id="resultText" class="fw-bold mb-1 mt-1"></h5>
+                        <p id="resultDesc" class="text-muted mb-1" style="font-size: 0.85rem;"></p>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="feature-box">
-                        <div class="icon-wrapper"><i class="fa-solid fa-lock"></i></div>
-                        <h3 class="feature-title">Bảo Mật Cục Bộ</h3>
-                        <p class="feature-text">Triển khai trên Docker Container, dữ liệu được xử lý tại chỗ, không gửi lên Cloud công cộng.</p>
+                    
+                    <div class="position-relative mx-auto mb-3" style="height: 200px; width: 200px;">
+                        <canvas id="riskChart"></canvas>
+                        <div class="position-absolute top-50 start-50 translate-middle text-center">
+                            <span class="text-muted small text-uppercase ls-1" style="font-size: 0.7rem;">Nguy cơ</span>
+                            <h3 id="percentText" class="fw-bolder mb-0"></h3>
+                        </div>
                     </div>
+
+                    <button type="button" class="btn btn-sm btn-outline-secondary px-4 py-2 mt-1 rounded-pill fw-bold shadow-sm" id="resetBtn">
+                        <i class="fas fa-redo-alt me-2"></i>Làm Mới
+                    </button>
                 </div>
+
             </div>
         </div>
-    </section>
+    </div>
+</div>
 
-    <footer>
-        <div class="container">
-            <h3>HỆ THỐNG HỖ TRỢ CHẨN ĐOÁN Y KHOA</h3>
-            <div class="mt-3">
-                <small>© Bản quyền thuộc DuyNguyenTech.</small>
-            </div>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
