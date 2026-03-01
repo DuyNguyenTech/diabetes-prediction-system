@@ -30,6 +30,8 @@ Hệ thống sử dụng bộ dữ liệu chuẩn y khoa **Diabetes Prediction D
 7. **HbA1c Level:** Chỉ số đường huyết trung bình trong 3 tháng. Đây là tiêu chuẩn vàng trong chẩn đoán tiểu đường hiện đại.
 8. **Blood Glucose Level:** Chỉ số đường huyết đo lúc đói.
 
+**Link dataset:** https://www.kaggle.com/datasets/iammustafatz/diabetes-prediction-dataset
+
 ---
 
 ## 🧠 3. Chi tiết về Thuật toán
@@ -86,10 +88,7 @@ DIABETES-PREDICTION-SYSTEM/
 │   └── Dockerfile          # Cấu hình Docker cho Backend
 │
 ├── frontend/               # Source code Frontend (HTML/CSS/JS)
-│   ├── index.html          # Trang chủ
-│   ├── diagnosis.html      # Trang chẩn đoán (Dashboard nhập liệu)
-│   ├── models.html         # Trang thông tin mô hình
-│   ├── news.html           # Trang tin tức
+│   ├── index.html          # Trang chủ / Giao diện chẩn đoán
 │   ├── script.js           # Xử lý logic gọi API Backend
 │   ├── style.css           # Giao diện
 │   └── Dockerfile          # Cấu hình Docker cho Nginx Frontend
