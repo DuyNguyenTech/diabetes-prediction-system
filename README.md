@@ -1,11 +1,16 @@
-# 🏥 HỆ THỐNG HỖ TRỢ CHẨN ĐOÁN Y KHOA
-
-![Python](https://img.shields.io/badge/Python-3.9-blue.svg)
-![Docker](https://img.shields.io/badge/Docker-Compose-2496ED.svg)
-![Algorithm](https://img.shields.io/badge/AI-Random_Forest-orange.svg)
-![Status](https://img.shields.io/badge/Status-Completed-success.svg)
+# 🏥 MÔ HÌNH AI HỖ TRỢ CHẨN ĐOÁN BỆNH TIỂU ĐƯỜNG
 
 > **Đồ án 2** - Nghiên cứu và xây dựng mô hình hỗ trợ chẩn đoán bệnh tiểu đường dựa trên dữ liệu lâm sàng.
+
+---
+
+## 🚀 0. TRUY CẬP HỆ THỐNG
+
+Hệ thống hiện đã được triển khai trực tuyến trên hạ tầng Cloud để phục vụ mục đích báo cáo và trải nghiệm thực tế:
+
+👉 **Địa chỉ Web:** [https://duynguyentech.vercel.app/](https://duynguyentech.vercel.app/)
+
+👉 **API Endpoint:** `https://api-tieu-duong-dnc.onrender.com`
 
 ---
 
@@ -30,7 +35,7 @@ Hệ thống sử dụng bộ dữ liệu chuẩn y khoa **Diabetes Prediction D
 7. **HbA1c Level:** Chỉ số đường huyết trung bình trong 3 tháng. Đây là tiêu chuẩn vàng trong chẩn đoán tiểu đường hiện đại.
 8. **Blood Glucose Level:** Chỉ số đường huyết đo lúc đói.
 
-**Link dataset:** https://www.kaggle.com/datasets/iammustafatz/diabetes-prediction-dataset
+**Link dataset:** [https://www.kaggle.com/datasets/iammustafatz/diabetes-prediction-dataset](https://www.kaggle.com/datasets/iammustafatz/diabetes-prediction-dataset)
 
 ---
 
@@ -40,10 +45,14 @@ Trong đồ án này sử dụng thuật toán **Random Forest Classifier** - m�
 
 **Cơ sở toán học:**
 Quá trình rẽ nhánh của các cây quyết định trong rừng được đo lường bằng **Entropy** (Độ hỗn loạn thông tin) và **Information Gain** (Độ lợi thông tin):
+
+
 $$H(S) = - \sum_{i=1}^{c} p_i \log_2(p_i)$$
+
 $$IG(S, A) = H(S) - \sum_{v \in Values(A)} \frac{|S_v|}{|S|} H(S_v)$$
 
 **Kỹ thuật xử lý phụ trợ:**
+
 * **Cân bằng dữ liệu:** Áp dụng thuật toán **SMOTE** (Synthetic Minority Over-sampling Technique) để sinh dữ liệu nhân tạo cho lớp thiểu số (người bệnh), giúp mô hình không bị thiên lệch về nhóm người khỏe mạnh.
 * **Chuẩn hóa:** Sử dụng `StandardScaler` và `One-Hot Encoding` cho các biến số và biến định danh.
 
@@ -52,11 +61,13 @@ $$IG(S, A) = H(S) - \sum_{v \in Values(A)} \frac{|S_v|}{|S|} H(S_v)$$
 ## 🔬 4. Thực nghiệm và So sánh SOTA
 
 Dựa trên việc đánh giá các công trình nghiên cứu tiêu biểu (State-of-the-Art) giai đoạn 2021-2025 trên các tập dữ liệu y khoa tương tự:
+
 * Nghiên cứu của Ali (2025) và Abdalrada (2024) sử dụng Logistic Regression đạt độ chính xác ~78% và Recall 72.4%. Các mô hình cơ bản này có thời gian huấn luyện nhanh nhưng khó đạt độ nhạy cao trên dữ liệu mất cân bằng.
 * Nghiên cứu của Ahmed (2024) chỉ ra rằng Random Forest cho hiệu năng vượt trội hơn khi kết hợp cùng SMOTE.
 
 **Mục tiêu và Kết quả thực nghiệm của hệ thống:**
-Khắc phục nhược điểm của các nghiên cứu trước, đồ án tập trung tinh chỉnh siêu tham số mô hình Random Forest trên tập dữ liệu lớn 100.000 mẫu. 
+Khắc phục nhược điểm của các nghiên cứu trước, đồ án tập trung tinh chỉnh siêu tham số mô hình Random Forest trên tập dữ liệu lớn 100.000 mẫu.
+
 * **Mục tiêu:** Ưu tiên tối đa hóa chỉ số Recall (Độ nhạy) > 90% để hạn chế triệt để việc bỏ sót bệnh nhân tiềm ẩn (Âm tính giả).
 * **Kết quả thực tế:** Sau quá trình huấn luyện thực nghiệm, hệ thống đã đạt chỉ số **Recall: 91.12%** (vượt mục tiêu đề ra) và **Accuracy: 89.50%**. Đây là những con số cực kỳ thực tế, chứng minh năng lực học sâu của mô hình trên dữ liệu y khoa phức tạp.
 
@@ -70,10 +81,21 @@ Khắc phục nhược điểm của các nghiên cứu trước, đồ án tậ
 
 *Hình 3: Trải nghiệm chẩn đoán thực tế trên Web Application*
 ![Web Testing](assets/web_testing.png)
+---
+
+## 🌐 5. Kiến trúc Triển khai (Cloud Architecture)
+
+Hệ thống được thiết kế theo kiến trúc Microservices tách biệt, triển khai trên các nền tảng Cloud hiện đại:
+
+| Thành phần | Công nghệ | Lý do lựa chọn |
+| --- | --- | --- |
+| **Frontend** | **Vercel** | Tốc độ phản hồi cực nhanh, tự động hóa quy trình CI/CD từ GitHub và tối ưu hóa tài nguyên tĩnh (HTML/CSS/JS). |
+| **Backend** | **Render** | Hỗ trợ triển khai Docker Container bền vững cho Python/Flask, quản lý tài nguyên tốt cho các tác vụ tính toán mô hình AI. |
+| **Keep-alive** | **Cron-job.org** | Do sử dụng gói dịch vụ miễn phí, Render sẽ tự động tạm dừng (ngủ) sau 15 phút không có lượt truy cập. Cron-job.org sẽ gửi tín hiệu ping mỗi 10 phút để giữ Server luôn ở trạng thái "Ready", đảm bảo phản hồi tức thì. |
 
 ---
 
-## 📂 5. Cấu trúc dự án
+## 📂 6. Cấu trúc dự án
 
 ```text
 DIABETES-PREDICTION-SYSTEM/
@@ -109,7 +131,7 @@ DIABETES-PREDICTION-SYSTEM/
 
 ---
 
-## ⚙️ 6. Cài đặt và Vận hành
+## ⚙️ 7. Cài đặt và Vận hành
 
 Để chạy hệ thống, bạn cần cài đặt **Docker** và **Docker Desktop** trên máy tính.
 
@@ -118,7 +140,7 @@ DIABETES-PREDICTION-SYSTEM/
 Tải mã nguồn về máy tính:
 
 ```bash
-git clone [https://github.com/DuyNguyenTech/diabetes-prediction-system.git](https://github.com/DuyNguyenTech/diabetes-prediction-system.git)
+git clone https://github.com/DuyNguyenTech/diabetes-prediction-system.git
 cd diabetes-prediction-system
 
 ```
@@ -131,8 +153,6 @@ Mở Terminal tại thư mục gốc của dự án và chạy lệnh:
 docker compose up --build
 
 ```
-
-*Lệnh này sẽ tự động tải thư viện, khởi chạy Backend (Flask), Frontend và Nginx Reverse Proxy.*
 
 ### Bước 3: Truy cập hệ thống
 
