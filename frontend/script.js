@@ -22,7 +22,7 @@ document.getElementById('diagnosisForm').addEventListener('submit', async functi
     };
 
     try {
-        const response = await fetch('/predict', {
+        const response = await fetch('https://api-tieu-duong-dnc.onrender.com/predict', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
