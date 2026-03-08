@@ -39,8 +39,13 @@ document.getElementById('diagnosisForm').addEventListener('submit', async functi
         renderResult(result);
 
     } catch (error) {
-        console.error("Lỗi chi tiết:", error);
-        alert('⚠️ Đã có lỗi xảy ra!\n\nChi tiết: ' + error.message);
+    console.error('Lỗi khi gọi API:', error);
+    if (error.message.includes('Failed to fetch')) {
+        alert('Máy chủ AI đang khởi động lại từ trạng thái nghỉ sẽ mất khoảng 50 giây.\n\nVui lòng không tắt trang, đợi một lát rồi bấm Phân Tích lại nhé!');
+    } else {
+        alert('Đã có lỗi xảy ra trong quá trình xử lý!\nChi tiết: ' + error.message);
+    }
+
     } finally {
         btn.disabled = false;
         btn.innerHTML = originalBtnHtml;
