@@ -8,7 +8,7 @@
 
 Hệ thống hiện đã được triển khai trực tuyến trên hạ tầng Cloud để phục vụ mục đích báo cáo và trải nghiệm thực tế:
 
-👉 **Địa chỉ Web:** [https://duynguyentech.vercel.app/](https://duynguyentech.vercel.app/)
+👉 **Địa chỉ Web:** [https://ho-tro-chan-doan-tieu-duong.vercel.app/](https://ho-tro-chan-doan-tieu-duong.vercel.app/)
 
 👉 **API Endpoint:** `https://api-tieu-duong-dnc.onrender.com`
 
