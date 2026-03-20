@@ -106,6 +106,7 @@ else:
 
 print(f"-> Nguong toi uu tim duoc: {final_threshold:.4f}")
 
+"""""
 #7 DANH GIA VA LUU ANH BAO CAO
 # Du doan lai voi nguong moi
 y_pred_new = (y_probs >= final_threshold).astype(int)
@@ -130,6 +131,69 @@ plt.xlabel('AI Du doan')
 # Luu anh vao thu muc reports (tu dong tao o dau code)
 plt.savefig('reports/confusion_matrix.png')
 print("BUOC 5: Da luu anh bao cao vao 'backend/reports/confusion_matrix.png'")
+"""
+
+#7 DANH GIA VA LUU ANH BAO CAO (PHIEN BAN TIENG ANH & DAY DU BIEU DO)
+# Du doan lai voi nguong moi
+y_pred_new = (y_probs >= final_threshold).astype(int)
+
+# Tinh cac chi so thuc te
+acc = accuracy_score(y_test, y_pred_new)
+rec = recall_score(y_test, y_pred_new)
+
+print("-" * 30)
+print(f"FINAL PERFORMANCE RESULTS:")
+print(f"Accuracy: {acc:.4f}")
+print(f"Recall:   {rec:.4f} (Target > 0.90)")
+print("-" * 30)
+
+# --- BIEU DO 1: CONFUSION MATRIX (ENGLISH) ---
+cm = confusion_matrix(y_test, y_pred_new)
+plt.figure(figsize=(8, 6))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', 
+            xticklabels=['Healthy', 'Diabetes'], 
+            yticklabels=['Healthy', 'Diabetes'])
+plt.title(f'Confusion Matrix (Recall > 90%) - Threshold {final_threshold:.2f}')
+plt.ylabel('Actual Class')
+plt.xlabel('Predicted Class')
+plt.savefig('reports/confusion_matrix_en.png')
+plt.close()
+
+# --- BIEU DO 2: FEATURE IMPORTANCE (CHUNG MINH LOGIC Y KHOA) ---
+# Lay ten cac cot sau khi ma hoa
+cat_encoder = pipeline.named_steps['preprocessor'].transformers_[1][1]
+encoded_cat_names = list(cat_encoder.get_feature_names_out(categorical_features))
+all_feature_names = numeric_features + encoded_cat_names
+
+importances = pipeline.named_steps['classifier'].feature_importances_
+feat_importances = pd.Series(importances, index=all_feature_names)
+
+plt.figure(figsize=(10, 6))
+feat_importances.nlargest(10).plot(kind='barh', color='teal')
+plt.title('Top 10 Clinical Features Influencing Prediction')
+plt.xlabel('Importance Score')
+plt.tight_layout()
+plt.savefig('reports/feature_importance.png')
+plt.close()
+
+# --- BIEU DO 3: ROC-AUC CURVE (CHUNG MINH NANG LUC PHAN LOAI) ---
+from sklearn.metrics import roc_curve, auc
+fpr, tpr, _ = roc_curve(y_test, y_probs)
+roc_auc = auc(fpr, tpr)
+
+plt.figure(figsize=(8, 6))
+plt.plot(fpr, tpr, color='darkorange', lw=2, label=f'ROC curve (area = {roc_auc:.2f})')
+plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate (Recall)')
+plt.title('Receiver Operating Characteristic (ROC)')
+plt.legend(loc="lower right")
+plt.savefig('reports/roc_auc_curve.png')
+plt.close()
+
+print("HOAN TAT: Da luu 3 file anh vao thu muc 'reports/' de dua vao bao cao.")
 
 #8 LUU MO HINH
 # Luu file model.pkl
