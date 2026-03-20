@@ -38,7 +38,9 @@
                         </div>
                         <div class="col-sm-6">
                             <label class="form-label fw-bold text-dark small mb-1">Tuổi</label>
-                            <input type="number" class="form-control form-control-sm text-dark" id="age" placeholder="Ví dụ: 29" min="1" max="120" required>
+                            <input type="number" id="age" min="0" max="120" required
+                                oninvalid="this.setCustomValidity('Vui lòng nhập tuổi từ 0 đến 120')"
+                                oninput="this.setCustomValidity('')">
                         </div>
 
                         <div class="col-sm-6">
@@ -70,20 +72,26 @@
                             <label class="form-label fw-bold text-dark small mb-1">
     BMI <i class="fas fa-question-circle text-secondary ms-1" style="font-size: 0.85em; cursor: help;" title="Chỉ số khối cơ thể. Tính bằng: Cân nặng(kg) / Chiều cao(m)². Mức bình thường: 18.5 - 24.9"></i>
 </label>
-                            <input type="number" step="0.1" class="form-control form-control-sm text-dark" id="bmi" placeholder="Ví dụ: 22.5" required>
+                            <input type="number" step="0.1" class="form-control form-control-sm text-dark" id="bmi" placeholder="Ví dụ: 22.5" min="10" max="80" required
+                                   oninvalid="this.setCustomValidity('Vui lòng nhập BMI hợp lệ (10 - 80)')"
+                                   oninput="this.setCustomValidity('')">
                         </div>
                         <div class="col-sm-6">
                             <label class="form-label fw-bold text-dark small mb-1">
     HbA1c (%) <i class="fas fa-question-circle text-secondary ms-1" style="font-size: 0.85em; cursor: help;" title="Đường huyết trung bình trong 2-3 tháng qua. Mức an toàn: Dưới 5.7%"></i>
 </label>
-                            <input type="number" step="0.1" class="form-control form-control-sm text-dark" id="HbA1c_level" placeholder="Ví dụ: 5.5" required>
+                            <input type="number" step="0.1" class="form-control form-control-sm text-dark" id="HbA1c_level" placeholder="Ví dụ: 5.5" min="3" max="20" required
+                                   oninvalid="this.setCustomValidity('Chỉ số HbA1c không hợp lệ (3% - 20%)')"
+                                   oninput="this.setCustomValidity('')">
                         </div>
 
                         <div class="col-12">
                             <label class="form-label fw-bold text-dark small mb-1">
     Đường huyết lúc đói (mg/dL) <i class="fas fa-question-circle text-secondary ms-1" style="font-size: 0.85em; cursor: help;" title="Đo vào buổi sáng, nhịn ăn ít nhất 8 tiếng. Mức an toàn: Dưới 100 mg/dL"></i>
 </label>
-                            <input type="number" class="form-control form-control-sm text-dark" id="blood_glucose_level" placeholder="Ví dụ: 120" required>
+                            <input type="number" class="form-control form-control-sm text-dark" id="blood_glucose_level" placeholder="Ví dụ: 120" min="40" max="600" required
+                                   oninvalid="this.setCustomValidity('Đường huyết không hợp lệ (40 - 600 mg/dL)')"
+                                   oninput="this.setCustomValidity('')">
                             <small class="text-muted fst-italic mt-1 d-block" style="font-size: 0.75rem;"><i class="fas fa-info-circle me-1"></i>* Đo vào buổi sáng, trước khi ăn.</small>
                         </div>
                     </div>
