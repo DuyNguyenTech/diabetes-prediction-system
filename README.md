@@ -9,10 +9,27 @@
 Hệ thống hiện đã được triển khai trực tuyến trên hạ tầng Cloud để phục vụ mục đích báo cáo và trải nghiệm thực tế:
 
 👉 **Địa chỉ Web:** [https://ho-tro-chan-doan-tieu-duong.vercel.app/](https://ho-tro-chan-doan-tieu-duong.vercel.app/)
+👉 **API Endpoint:** `https://api-tieu-duong-docker.onrender.com`
 
-👉 **API Endpoint:** `https://api-tieu-duong-dnc.onrender.com`
+### 🧪 Dữ liệu kiểm thử mẫu
+Để đánh giá độ chính xác thực tế của mô hình, hội đồng có thể sử dụng các mẫu dữ liệu được trích xuất ngẫu nhiên từ chính tập dữ liệu gốc để kiểm thử trực tiếp trên website:
 
----
+**Test Case 1: Bệnh nhân khỏe mạnh (Nhãn 0)**
+*Mẫu dữ liệu thực tế số 1 - Mô hình sẽ phân tích và trả về kết quả An toàn.*
+- **Giới tính:** Nam (Male) | **Tuổi:** 30 | **Cao huyết áp:** Không (0) | **Bệnh tim mạch:** Không (0)
+- **Hút thuốc:** Chưa bao giờ | **BMI:** 29.34 | **HbA1c (%):** 6.6 | **Đường huyết (mg/dL):** 140
+👉 *Kết quả mong đợi: Cảnh báo Xanh - KẾT QUẢ AN TOÀN.*
+
+**Test Case 2: Bệnh nhân có nguy cơ mắc tiểu đường (Nhãn 1)**
+*Mẫu dữ liệu thực tế số 5 - Người này có nhiều yếu tố rủi ro, AI sẽ phát hiện và đưa ra cảnh báo.*
+- **Giới tính:** Nam (Male) | **Tuổi:** 63 | **Cao huyết áp:** Có (1) | **Bệnh tim mạch:** Không (0)
+- **Hút thuốc:** Đã cai | **BMI:** 35.06 | **HbA1c (%):** 5.8 | **Đường huyết (mg/dL):** 200
+👉 *Kết quả mong đợi: Cảnh báo Đỏ - CẢNH BÁO NGUY CƠ CAO.*
+
+**Test Case 3: Kiểm tra tính hợp lệ của hệ thống (Validation)**
+*Thử nghiệm tính năng ngăn chặn dữ liệu rác trước khi gửi cho AI xử lý.*
+- Thử nhập **Tuổi** = `290` hoặc **Đường huyết** = `22222222`
+👉 *Kết quả mong đợi: Hệ thống chặn phân tích, hiển thị thông báo lỗi yêu cầu nhập số liệu chuẩn y khoa.*
 
 ## 📖 1. Giới thiệu đề tài
 
